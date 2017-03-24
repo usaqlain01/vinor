@@ -39,6 +39,46 @@
         "pre-autoload-dump": "Drupal\\Core\\Composer\\Composer::preAutoloadDump",
         "post-autoload-dump": "Drupal\\Core\\Composer\\Composer::ensureHtaccess",
         "post-package-install": "Drupal\\Core\\Composer\\Composer::vendorTestCodeCleanup",
-        "post-package-update": "Drupal\\Core\\Composer\\Composer::vendorTestCodeCleanup"
+        "post-package-update": "Drupal\\Core\\Composer\\Composer::vendorTestCodeCleanup",
+        "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
+        "pre-install-cmd": [
+            "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
+        ],
+        "pre-update-cmd": [
+            "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
+        ],
+        "post-install-cmd": [
+            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+        ],
+        "post-update-cmd": [
+            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+        ],
+        "drush:login": [
+            "drush --yes uli"
+        ],
+        "drupal:unlock": [
+            "chmod +w sites/default && chmod +w sites/default/settings.* && chmod +w sites/default/services.yml"
+        ],
+        "sync:dev": [
+            "drush --yes sql-sync @caxy.dev @self",
+            "drush --yes rsync @caxy.dev:%files @self:%files -Pv",
+            "@prepare:dev"
+        ],
+        "sync:test": [
+            "drush --yes sql-sync @caxy.test @self",
+            "drush --yes rsync @caxy.test:%files @self:%files -Pv",
+            "@prepare:dev"
+        ],
+        "sync:prod": [
+            "drush --yes sql-sync @caxy.prod @self",
+            "drush --yes rsync @caxy.prod:%files @self:%files -Pv",
+            "@prepare:dev"
+        ],
+        "drush:cache:clear": [
+            "drush --yes cache-rebuild all"
+        ],
+        "prepare:dev": [
+            "drush --yes en views_ui field_ui"
+        ]
     }
 }

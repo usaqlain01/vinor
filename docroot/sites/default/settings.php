@@ -770,3 +770,5 @@ if (isset($_SERVER['DEVDESKTOP_DRUPAL_SETTINGS_DIR']) && file_exists($_SERVER['D
 if (file_exists('/var/www/site-php')) {
   require('/var/www/site-php/vinor/vinor-settings.inc');
 }
+
+$config_directories['sync'] = 'sites/default/files/config_acqTmp-2017-03-24T08.57.43-6133/sync';
