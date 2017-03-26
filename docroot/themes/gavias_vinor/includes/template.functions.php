@@ -29,7 +29,7 @@ function gavias_vinor_preprocess_node(&$variables) {
                $autoembed = new AutoEmbed();
                $iframe = $autoembed->parse($field_post_embed->value);
 
-                //iframe was getting the height from source, i.e vimeo, youtube etc.
+               //iframe was getting dimensions from source's container not fitting ours.
                $frameParts = explode(" ", $iframe);
                foreach($frameParts as $index => $value){
                   if(strpos($value, "width=") !== false) {
